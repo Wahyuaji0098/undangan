@@ -14,6 +14,7 @@ import {
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { format } from "date-fns";
+import { Modal } from "@fluentui/react";
 
 // import gambar
 var background_image = require("../src/images/BG.png");
@@ -57,6 +58,8 @@ var images = [slide1, slide2, slide3, slide4, slide5, slide6];
 
 function App() {
   //set usestate
+  const [modal, setModal] = React.useState(false);
+  const [selectedImage, setSelectedImage] = React.useState("");
   const [from, setFrom] = React.useState("");
   const [message, setMessage] = React.useState("");
   const [ucapan, setUcapan] = React.useState([]) as any;
@@ -99,7 +102,7 @@ function App() {
       {/* ketika undangan dibuka */}
       {isMobile === true && open === true && (
         <div
-          className="flex flex-col w-full items-center"
+          className="flex flex-col w-screen overflow-x-hidden items-center"
           style={{
             backgroundSize: "400px",
             backgroundRepeat: "repeat",
@@ -122,8 +125,11 @@ function App() {
           </button>
 
           {/* ayat ayat */}
-          <div className="mt-10 flex w-full py-5 px-10 text-center">
-            <div className="font-raleway text-black z-50">
+          <div
+            className="mt-10 flex w-full my-2 py-3 px-10 text-center"
+            style={{ background: `rgba(217, 178, 143, 0.4)` }}
+          >
+            <div className="font-raleway text-black font-medium z-50 opacity-100">
               AND ONE OF HIS SIGNS IS THAT HE CREATED FOR YOU SPOUSES FROM AMONG
               YOURSELVES SO THAT YOU MAY FIND COMFORT IN THEM. AND HE HAS PLACED
               BETWEEN YOU COMPASSION AND MERCY. SURELY IN THIS ARE SIGNS FOR
@@ -131,7 +137,10 @@ function App() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center mb-5 mt-5">
+          <div
+            className="flex flex-col items-center mb-5 mt-5 rounded-full "
+            // style={{ background: `rgba(204, 204, 204, 0.5)` }}
+          >
             <div className="font-italliano text-6xl">Wahyu</div>
             <div className="font-italliano mt-1 text-6xl">&</div>
             <div className="font-italliano mt-1 text-6xl">Vera</div>
@@ -141,54 +150,65 @@ function App() {
           </div>
 
           {/* timer */}
-          <div className="flex flex-row py-5 px-10 gap-x-2">
+          <div
+            className="flex flex-row py-5 px-10 gap-x-2 mt-10"
+            style={{ background: `rgba(217, 178, 143, 0.4)` }}
+          >
             <div className="flex flex-col items-center min-w-16">
-              <div className="font-raleway text-4xl">
+              <div className="font-raleway text-4xl text-black">
                 {days < 10 ? "0" + days : days}
               </div>
-              <div className="font-raleway text-xs font-bold">
+              <div className="font-raleway text-xs font-bold text-black">
                 {days > 1 ? "Days" : "Day"}
               </div>
             </div>
-            <div className="font-raleway text-4xl font-bold">:</div>
+            <div className="font-raleway text-4xl font-bold text-black">:</div>
             <div className="flex flex-col items-center min-w-16">
-              <div className="font-raleway text-4xl">
+              <div className="font-raleway text-4xl text-black">
                 {hours < 10 ? "0" + hours : hours}
               </div>
-              <div className="font-raleway text-xs font-bold">
+              <div className="font-raleway text-xs font-bold text-black">
                 {hours > 1 ? "Hours" : "Hour"}
               </div>
             </div>
-            <div className="font-raleway text-4xl font-bold">:</div>
+            <div className="font-raleway text-4xl font-bold text-black">:</div>
             <div className="flex flex-col items-center min-w-16">
-              <div className="font-raleway text-4xl">
+              <div className="font-raleway text-4xl text-black">
                 {minutes < 10 ? "0" + minutes : minutes}
               </div>
-              <div className="font-raleway text-xs font-bold">
+              <div className="font-raleway text-xs font-bold text-black">
                 {minutes > 1 ? "Minutes" : "Minute"}
               </div>
             </div>
-            <div className="font-raleway text-4xl font-bold">:</div>
+            <div className="font-raleway text-4xl font-bold text-black">:</div>
             <div className="flex flex-col items-center min-w-16">
-              <div className="font-raleway text-4xl">
+              <div className="font-raleway text-4xl text-black">
                 {seconds < 10 ? "0" + seconds : seconds}
               </div>
-              <div className="font-raleway text-xs font-bold">
+              <div className="font-raleway text-xs font-bold text-black">
                 {seconds > 1 ? "Seconds" : "Second"}
               </div>
             </div>
           </div>
 
           {/* couples */}
-          <div className="flex flex-col w-full px-10 mt-20 mb-5 items-center">
-            <div className="font-italliano mb-5 text-5xl">The Couples</div>
-            <div>
+          <div
+            className="flex flex-col w-full pt-20 items-center"
+            style={{ background: `rgba(217, 178, 143, 0.4)` }}
+          >
+            <div
+              className="font-italliano mb-5 text-5xl w-full text-center py-5 text-black"
+              style={{ background: `rgba(217, 178, 143, 0.6)` }}
+            >
+              The Couples
+            </div>
+            <div className="px-10">
               <img
                 src={foto_wahyu}
                 className="border-2 border-solid border-amber-600 rounded-3xl"
               />
             </div>
-            <div className="flex flex-col mt-5 mb-10 gap-x-5">
+            <div className="flex flex-col mt-5 mb-10 gap-x-5 px-10">
               <div className="font-italliano text-4xl text-center">
                 Wahyu Aji Pangestu, S.Kom.
               </div>
@@ -196,13 +216,13 @@ function App() {
                 Putra Pertama dari Bpk. Atang Harijanto dan Ibu Susi Soeswanti
               </div>
             </div>
-            <div>
+            <div className="px-10">
               <img
                 src={foto_vera}
                 className="border-2 border-solid border-amber-600 rounded-3xl"
               />
             </div>
-            <div className="flex flex-col mt-5 mb-10 gap-x-5">
+            <div className="flex flex-col px-10 mt-5 mb-10 gap-x-5">
               <div className="font-italliano text-4xl text-center">
                 Vera Wati, S.Pd.
               </div>
@@ -213,11 +233,17 @@ function App() {
           </div>
 
           {/* Waktu dan lokasi */}
-          <div className="flex flex-col w-full px-10 mt-10 mb-5">
-            <div className="font-italliano text-center mb-5 text-5xl">
+          <div
+            className="flex flex-col w-full pb-5"
+            style={{ background: `rgba(217, 178, 143, 0.4)` }}
+          >
+            <div
+              className="font-italliano text-center py-5 mb-5 text-5xl"
+              style={{ background: `rgba(217, 178, 143, 0.6)` }}
+            >
               Time and Place
             </div>
-            <div className="flex-col flex text-center items-center">
+            <div className="flex-col flex text-center items-center px-10">
               <div className="font-raleway text-2xl items-center">
                 Graha Pariwisata
               </div>
@@ -229,19 +255,22 @@ function App() {
                 onClick={() =>
                   window.open("https://maps.app.goo.gl/r6Rds19pt14yxYG39")
                 }
-                className="flex flex-row mt-5 items-center font-raleway border-b-2 w-fit"
+                className="flex flex-row mt-5 items-center font-raleway border-b-2 border-b-[#a87547] w-fit"
               >
-                <Icon icon={"mdi:location"} />
-                See Location
+                <Icon icon={"mdi:location"} className="text-[#a87547]" />
+                See Location in Maps
               </button>
             </div>
-            <div className="flex flex-col mt-10 justify-end">
+            <div className="flex flex-col mt-10 justify-end px-10">
               <Timeline>
                 <TimelineItem>
                   <TimelineConnector />
                   <TimelineHeader>
                     <TimelineIcon className="p-2">
-                      <Icon icon="mdi:calendar" />
+                      <Icon
+                        icon="mdi:calendar"
+                        className="text-[#a87547] text-2xl"
+                      />
                     </TimelineIcon>
                     <div className="font-raleway text-xl">Akad Nikah</div>
                   </TimelineHeader>
@@ -256,7 +285,10 @@ function App() {
                   <TimelineConnector />
                   <TimelineHeader>
                     <TimelineIcon className="p-2">
-                      <Icon icon="mdi:home" />
+                      <Icon
+                        icon="mdi:home"
+                        className="text-[#a87547] text-2xl"
+                      />
                     </TimelineIcon>
                     <div className="font-raleway text-xl">Resepsi</div>
                   </TimelineHeader>
@@ -270,13 +302,17 @@ function App() {
               </Timeline>
             </div>
           </div>
-          <div className="mt-10 mx-10 w-full flex flex-col mb-10">
-            <div className="w-full flex-1 py-5 text-5xl text-center">
-              <div className="font-italliano text-black z-50 opacity-100">
-                Gallery
-              </div>
+          <div
+            className="w-full flex flex-col pb-10"
+            style={{ background: `rgba(217, 178, 143, 0.4)` }}
+          >
+            <div
+              className="w-full flex-1 py-5 text-5xl text-center font-italliano"
+              style={{ background: `rgba(217, 178, 143, 0.4)` }}
+            >
+              Gallery
             </div>
-            <div className="flex flex-row mt-10 mb-5 rounded-2xl mx-10 bg-slate-300 p-2">
+            <div className="flex flex-row mt-10 mb-5 rounded-[20px] mx-10 bg-[#a87547] p-1">
               <Carousel
                 onClickThumb={(idx: any) => setSelectedItem(Number(idx))}
                 autoPlay
@@ -307,28 +343,41 @@ function App() {
             <div className="grid-cols-2 grid gap-5 mx-10">
               {images.map((file, idx) => {
                 return (
-                  <img
-                    key={idx}
-                    src={file}
-                    className="rounded-2xl max-w-30"
-                    alt={`slide${idx}`}
-                  />
+                  <button
+                    onClick={(e) => {
+                      setSelectedImage(file);
+                      setModal(true);
+                    }}
+                  >
+                    <img
+                      key={idx}
+                      src={file}
+                      className="rounded-2xl max-w-30 border-[#a87547] border-4"
+                      alt={`slide${idx}`}
+                    />
+                  </button>
                 );
               })}
             </div>
           </div>
 
           {/* pesan ucapan */}
-          <div className="flex w-full px-10 my-5 flex-col">
+          <div
+            className="flex w-full px-10 pb-5 flex-col"
+            style={{ background: `rgba(217, 178, 143, 0.4)` }}
+          >
             <div className="flex my-5 font-italliano text-5xl">
               Write a Wish
             </div>
-            <div className="bg-amber-200 rounded-2xl px-5 py-4 flex flex-col">
-              <div className="flex flex-row border-b-2 pb-2 items-center border-amber-600 gap-x-2 font-quicksnad text-sm font-bold">
+            <div
+              className="rounded-2xl px-5 py-4 flex flex-col"
+              style={{ background: `rgba(217, 178, 143, 0.6)` }}
+            >
+              <div className="flex flex-row border-b-2 pb-2 items-center border-[#a87547] gap-x-2 font-quicksnad text-sm font-bold">
                 <Icon icon="iconamoon:comment" />
                 {ucapan.length} wishes for Wahyu & Vera
               </div>
-              <div className="flex flex-col mt-4 gap-y-4 border-b-2 border-amber-600 pb-3">
+              <div className="flex flex-col mt-4 gap-y-4 border-b-2 border-[#a87547] pb-3">
                 <input
                   className="font-quicksnad py-1 px-3 rounded-lg"
                   placeholder="Name"
@@ -345,7 +394,7 @@ function App() {
                   onChange={(e) => setMessage(e.target.value)}
                 />
                 <button
-                  className="bg-amber-500 rounded-2xl w-fit px-4 py-2 font-quicksnad font-bold"
+                  className="bg-[#a87547] rounded-2xl w-fit px-4 py-2 font-quicksnad font-bold"
                   onClick={() => {
                     let a = ucapan;
                     a.push({
@@ -358,7 +407,10 @@ function App() {
                     setMessage("");
                   }}
                 >
-                  Send
+                  <div className="text-white flex flex-row gap-x-3 items-center">
+                    Send
+                    <Icon icon="mdi:send" className="text-white" />
+                  </div>
                 </button>
               </div>
               <div className="flex flex-col w-full flex-1 mt-5 gap-y-4">
@@ -390,6 +442,9 @@ function App() {
                   })}
               </div>
             </div>
+            <div className="flex w-full justify-center text-xs font-medium pt-5">
+              Designed by Vera | Coded by Wahyu
+            </div>
           </div>
         </div>
       )}
@@ -407,6 +462,7 @@ function App() {
           </div>
           <div className="flex w-full items-center justify-center gap-10 flex-col">
             <div className="text px-10 text-center mt-[370px] font-quicksnad text-2xl">
+              To:{" "}
               {window.location.search
                 .replace("?", "")
                 .replace(new RegExp("\\+", "g"), " ")}
@@ -416,9 +472,11 @@ function App() {
                 setOpen(true);
                 play();
               }}
-              className="bg-gray-400 p-3 rounded-xl"
+              className="bg-[#a87547] p-3 rounded-xl"
             >
-              <div className="font-quicksnad font-bold">Open Invitation</div>
+              <div className="font-quicksnad font-bold text-white">
+                Open Invitation
+              </div>
             </button>
           </div>
         </div>
@@ -426,6 +484,26 @@ function App() {
         // ketika buka dari pc
         <div></div>
       )}
+      <Modal
+        className="bg-transparent"
+        isOpen={modal}
+        onDismiss={() => {
+          setModal(false);
+          setSelectedImage("");
+        }}
+      >
+        <div className="flex flex-col px-10 py-20 bg-transparent">
+          oke
+          <button
+            onClick={() => {
+              setModal(false);
+              setSelectedImage("");
+            }}
+          >
+            close
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 }
