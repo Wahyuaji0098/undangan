@@ -344,9 +344,10 @@ function App() {
               {images.map((file, idx) => {
                 return (
                   <button
+                    key={idx}
                     onClick={(e) => {
-                      setSelectedImage(file);
-                      setModal(true);
+                      // setSelectedImage(file);
+                      // setModal(true);
                     }}
                   >
                     <img
