@@ -81,7 +81,6 @@ function App() {
     setMinutes(Math.floor((time / 1000 / 60) % 60));
     setSeconds(Math.floor((time / 1000) % 60));
   };
-
   React.useEffect(() => {
     const interval = setInterval(() => getTime(), 1000);
     // play();
@@ -89,12 +88,16 @@ function App() {
   }, []);
   return (
     <div
+      onScroll={() => {
+        console.log("abc");
+      }}
       className="flex flex-1 items-center flex-col"
       style={{
         backgroundSize: "cover",
         backgroundImage: `url(${background_image})`,
-        height: "100vh",
-        // overflowY: "hidden",
+        height: open === true ? "100vh" : "100vh",
+        // height: "100%",
+        overflowY: "scroll",
       }}
     >
       <DisableZoom />
@@ -102,7 +105,10 @@ function App() {
       {/* ketika undangan dibuka */}
       {isMobile === true && open === true && (
         <div
-          className="flex flex-col w-screen overflow-x-hidden items-center"
+          onScroll={() => {
+            console.log(window.screen.orientation.type);
+          }}
+          className="flex flex-col w-screen overflow-x-hidden overflow-y-scroll items-center"
           style={{
             backgroundSize: "400px",
             backgroundRepeat: "repeat",
@@ -126,24 +132,27 @@ function App() {
 
           {/* ayat ayat */}
           <div
-            className="mt-10 flex w-full my-2 py-3 px-10 text-center"
+            className="mt-10 flex w-full my-2 py-3 px-5 text-center"
             style={{ background: `rgba(217, 178, 143, 0.4)` }}
           >
-            <div className="font-raleway text-black font-medium z-50 opacity-100">
-              AND ONE OF HIS SIGNS IS THAT HE CREATED FOR YOU SPOUSES FROM AMONG
-              YOURSELVES SO THAT YOU MAY FIND COMFORT IN THEM. AND HE HAS PLACED
-              BETWEEN YOU COMPASSION AND MERCY. SURELY IN THIS ARE SIGNS FOR
-              PEOPLE WHO REFLECT. (Ar- Rum: 21)
+            <div
+              className="font-raleway text-black font-medium z-50 opacity-100 px-5 py-5 rounded-2xl"
+              style={{ background: `rgba(255, 255, 255, 0.6)` }}
+            >
+              And one of His signs is that He created for you spouses from among
+              yourselves so that you may find comfort in them. And He has placed
+              between you compassion and mercy. Surely in this are signs for
+              people who reflect. (Ar- Rum: 21)
             </div>
           </div>
 
           <div
-            className="flex flex-col items-center mb-5 mt-5 rounded-full "
+            className="flex flex-col items-center rounded-full my-5"
             // style={{ background: `rgba(204, 204, 204, 0.5)` }}
           >
-            <div className="font-italliano text-6xl">Wahyu</div>
-            <div className="font-italliano mt-1 text-6xl">&</div>
-            <div className="font-italliano mt-1 text-6xl">Vera</div>
+            <div className="font-tangerine text-6xl">Wahyu</div>
+            <div className="font-tangerine mt-1 text-6xl">&</div>
+            <div className="font-tangerine mt-1 text-6xl">Vera</div>
             <div className="font-raleway mt-5 text-xl">
               Sabtu, 27 April 2024
             </div>
@@ -151,7 +160,7 @@ function App() {
 
           {/* timer */}
           <div
-            className="flex flex-row py-5 px-10 gap-x-2 mt-10"
+            className="flex flex-row py-5 px-10 gap-x-2 mt-10 mb-15 w-full justify-center"
             style={{ background: `rgba(217, 178, 143, 0.4)` }}
           >
             <div className="flex flex-col items-center min-w-16">
@@ -193,11 +202,11 @@ function App() {
 
           {/* couples */}
           <div
-            className="flex flex-col w-full pt-20 items-center"
+            className="flex flex-col w-full items-center"
             style={{ background: `rgba(217, 178, 143, 0.4)` }}
           >
             <div
-              className="font-italliano mb-5 text-5xl w-full text-center py-5 text-black"
+              className="font-tangerine mb-5 text-5xl w-full text-center py-5 text-black"
               style={{ background: `rgba(217, 178, 143, 0.6)` }}
             >
               The Couples
@@ -205,30 +214,54 @@ function App() {
             <div className="px-10">
               <img
                 src={foto_wahyu}
-                className="border-2 border-solid border-amber-600 rounded-3xl"
+                className="border-4 border-solid border-[#a87547] rounded-3xl"
               />
             </div>
             <div className="flex flex-col mt-5 mb-10 gap-x-5 px-10">
-              <div className="font-italliano text-4xl text-center">
+              <div className="font-tangerine text-4xl text-center">
                 Wahyu Aji Pangestu, S.Kom.
               </div>
               <div className="text-center font-raleway">
                 Putra Pertama dari Bpk. Atang Harijanto dan Ibu Susi Soeswanti
               </div>
+              <button
+                className="w-full flex justify-center mt-3 flex-row gap-x-3 items-center"
+                onClick={() =>
+                  window.open("https://www.instagram.com/wahyuu.ajip/")
+                }
+              >
+                <Icon
+                  icon="mdi:instagram"
+                  className="text-[#a87547] text-2xl"
+                />
+                {/* <div className="text-sm text-[#a87547]">Instagram</div> */}
+              </button>
             </div>
             <div className="px-10">
               <img
                 src={foto_vera}
-                className="border-2 border-solid border-amber-600 rounded-3xl"
+                className="border-4 border-solid border-[#a87547] rounded-3xl"
               />
             </div>
             <div className="flex flex-col px-10 mt-5 mb-10 gap-x-5">
-              <div className="font-italliano text-4xl text-center">
+              <div className="font-tangerine text-4xl text-center">
                 Vera Wati, S.Pd.
               </div>
               <div className="text-center font-raleway">
                 Putri Kedua dari Bpk. Agus Suwito dan Ibu Wiwik Nurkhayati
               </div>
+              <button
+                className="w-full flex justify-center mt-3 flex-row gap-x-3 items-center"
+                onClick={() =>
+                  window.open("https://www.instagram.com/vera.watii/")
+                }
+              >
+                <Icon
+                  icon="mdi:instagram"
+                  className="text-[#a87547] text-2xl"
+                />
+                {/* <div className="text-sm text-[#a87547]">Instagram</div> */}
+              </button>
             </div>
           </div>
 
@@ -238,7 +271,7 @@ function App() {
             style={{ background: `rgba(217, 178, 143, 0.4)` }}
           >
             <div
-              className="font-italliano text-center py-5 mb-5 text-5xl"
+              className="font-tangerine text-center py-5 mb-5 text-5xl"
               style={{ background: `rgba(217, 178, 143, 0.6)` }}
             >
               Time and Place
@@ -286,7 +319,7 @@ function App() {
                   <TimelineHeader>
                     <TimelineIcon className="p-2">
                       <Icon
-                        icon="mdi:home"
+                        icon="mdi:calendar"
                         className="text-[#a87547] text-2xl"
                       />
                     </TimelineIcon>
@@ -307,8 +340,8 @@ function App() {
             style={{ background: `rgba(217, 178, 143, 0.4)` }}
           >
             <div
-              className="w-full flex-1 py-5 text-5xl text-center font-italliano"
-              style={{ background: `rgba(217, 178, 143, 0.4)` }}
+              className="w-full flex-1 py-5 text-5xl text-center font-tangerine"
+              style={{ background: `rgba(217, 178, 143, 0.6)` }}
             >
               Gallery
             </div>
@@ -346,8 +379,8 @@ function App() {
                   <button
                     key={idx}
                     onClick={(e) => {
-                      // setSelectedImage(file);
-                      // setModal(true);
+                      setSelectedImage(file);
+                      setModal(true);
                     }}
                   >
                     <img
@@ -364,14 +397,17 @@ function App() {
 
           {/* pesan ucapan */}
           <div
-            className="flex w-full px-10 pb-5 flex-col"
+            className="flex w-full pb-5 flex-col"
             style={{ background: `rgba(217, 178, 143, 0.4)` }}
           >
-            <div className="flex my-5 font-italliano text-5xl">
+            <div
+              className="flex my-5 font-tangerine text-5xl w-full bg-red-200 justify-center py-5"
+              style={{ background: `rgba(217, 178, 143, 0.6)` }}
+            >
               Write a Wish
             </div>
             <div
-              className="rounded-2xl px-5 py-4 flex flex-col"
+              className="rounded-2xl mx-10 px-5 py-4 flex flex-col"
               style={{ background: `rgba(217, 178, 143, 0.6)` }}
             >
               <div className="flex flex-row border-b-2 pb-2 items-center border-[#a87547] gap-x-2 font-quicksnad text-sm font-bold">
@@ -443,7 +479,7 @@ function App() {
                   })}
               </div>
             </div>
-            <div className="flex w-full justify-center text-xs font-medium pt-5">
+            <div className="flex w-full justify-center text-xs font-medium pt-5 text-black">
               Designed by Vera | Coded by Wahyu
             </div>
           </div>
@@ -457,7 +493,7 @@ function App() {
             <div className="font-quicksnad text-3xl pb-4">
               Wedding Invitation
             </div>
-            <div className="font-italliano font-bold text-[44px]">
+            <div className="font-tangerine font-bold text-[44px]">
               Wahyu & Vera
             </div>
           </div>
@@ -486,22 +522,36 @@ function App() {
         <div></div>
       )}
       <Modal
-        className="bg-transparent"
+        className="bg-transparent flex"
         isOpen={modal}
         onDismiss={() => {
           setModal(false);
           setSelectedImage("");
         }}
+        containerClassName="bg-transparent flex"
       >
-        <div className="flex flex-col px-10 py-20 bg-transparent">
-          oke
+        <div className="flex flex-col rounded-3xl bg-transparent">
           <button
             onClick={() => {
               setModal(false);
               setSelectedImage("");
             }}
           >
-            close
+            <Icon
+              icon="iconoir:cancel"
+              className="text-4xl text-white hover:text-red-500"
+            />
+          </button>
+          <button
+            onClick={() => {
+              setModal(false);
+              setSelectedImage("");
+            }}
+          >
+            <img
+              src={selectedImage}
+              className="rounded-3xl border-[#a87547] border-4"
+            />
           </button>
         </div>
       </Modal>
