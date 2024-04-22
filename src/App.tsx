@@ -294,7 +294,29 @@ function App() {
                 See Location in Maps
               </button>
             </div>
-            <div className="flex flex-col mt-10 justify-end px-10">
+            <div className="flex flex-col p-2 pb-0 w-full gap-y-5 pl-[15%]">
+              <div className="flex flex-row gap-x-5">
+                <Icon icon="mdi:calendar" className="text-[#a87547] text-2xl" />
+                <div className="flex flex-col">
+                  <div className="font-quicksnad text-[17px]">Akad Nikah</div>
+                  <div className="font-quicksnad text-[17px]">
+                    Jumat, 19 April 2024 <br />
+                    08:00 - 11:00
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-row gap-x-5">
+                <Icon icon="mdi:calendar" className="text-[#a87547] text-2xl" />
+                <div className="flex flex-col">
+                  <div className="font-quicksnad text-[17px]">Resepsi</div>
+                  <div className="font-quicksnad text-[17px]">
+                    Sabtu, 27 April 2024 <br />
+                    10:00 - 12:00
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* <div className="flex flex-col mt-10 justify-end px-10">
               <Timeline>
                 <TimelineItem>
                   <TimelineConnector />
@@ -333,7 +355,7 @@ function App() {
                   </TimelineBody>
                 </TimelineItem>
               </Timeline>
-            </div>
+            </div> */}
           </div>
           <div
             className="w-full flex flex-col pb-10"
